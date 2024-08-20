@@ -5,7 +5,7 @@ from aiogram.fsm.storage.memory import MemoryStorage
 
 from bot import admin_router
 from config.config_manager import ConfigManager
-from database.database_manager import create_table_channels
+from database.database_manager import create_table_channels, create_table_subscribers
 
 config_manager = ConfigManager()
 
@@ -19,12 +19,13 @@ dp = Dispatcher(storage=storage)
 async def on_ready():
     print('Bot is ready')
 
+# Initialize bot
+bot = Bot(token=config_manager.get_config_value("BOT_TOKEN", str))
+
 # Main startup function
 async def main():
     await create_table_channels()
-
-    # Initialize bot
-    bot = Bot(token=config_manager.get_config_value("BOT_TOKEN", str))
+    await create_table_subscribers()
 
     # Register Routes
     dp.include_routers(admin_router.router)

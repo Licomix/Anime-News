@@ -18,7 +18,7 @@ def clean_html(html_content):
         # Заменить <cite> на <p>
         cite.replace_with(text)
 
-    tags_to_remove = ['div', 'em', 'span']
+    tags_to_remove = ['div', 'em', 'span', 'center']
     # Удаляем все теги из списка
     for tag in tags_to_remove:
         for match in soup.find_all(tag):

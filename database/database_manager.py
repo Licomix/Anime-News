@@ -43,3 +43,11 @@ async def create_table_channels():
                 lang TEXT DEFAULT uk
             );
         """)
+
+async def create_table_subscribers():
+    async with SQLiteDatabaseManager() as conn:
+        await conn.execute("""CREATE TABLE IF NOT EXISTS subscriber_list (
+                user_id INTEGER PRIMARY KEY,
+                lang TEXT DEFAULT uk
+            );
+        """)
